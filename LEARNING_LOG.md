@@ -13,4 +13,9 @@ the scrpit is in below
 (b)What did not understand?
 the issue of taking to much time for the reponse from the api key
 
+(c)can i generate the images,videos like real gemini chatboot app?
 
+date 11/12/2026
+(a)what i learned ?
+(b)what i did not understand?
+(c)for next day question?

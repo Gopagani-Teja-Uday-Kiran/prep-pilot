@@ -17,5 +17,8 @@ the issue of taking to much time for the reponse from the api key
 
 date 11/12/2026
 (a)what i learned ?
+I learned about the elements of prompt and difference between the output of grow api,gemeni ai,ollama
 (b)what i did not understand?
+i didn't get the point of zero shot prompting
 (c)for next day question?
+when I developed an chatboot app with ollama and deployed it is it used  ollama for other users which I was deployed?

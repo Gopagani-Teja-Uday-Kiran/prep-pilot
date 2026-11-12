@@ -22,3 +22,8 @@ I learned about the elements of prompt and difference between the output of grow
 i didn't get the point of zero shot prompting
 (c)for next day question?
 when I developed an chatboot app with ollama and deployed it is it used  ollama for other users which I was deployed?
+
+date 12-11-2026
+What I learned ?
+What i didnot get?
+What is the Tommorow next question?

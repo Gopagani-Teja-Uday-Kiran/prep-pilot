@@ -17,7 +17,7 @@ the issue of taking to much time for the reponse from the api key
 
 date 11/12/2026
 (a)what i learned ?
-I learned about the elements of prompt and difference between the output of grow api,gemeni ai,ollama
+I learned about the elements of prompt and difference between the output of grow api,gemeni ai,ollama.
 (b)what i did not understand?
 i didn't get the point of zero shot prompting
 (c)for next day question?
@@ -27,3 +27,31 @@ date 12-11-2026
 What I learned ?
 What i didnot get?
 What is the Tommorow next question?
+what is our project plan?
+Project title: PrepPilot — An Explainable, RAG-Based AI Study and Quiz Assistant Using Open Educational Resources.
+Project objective: Build an AI-powered learning platform that converts openly licensed educational materials into study notes, interactive quizzes, question-answering sessions and personalized revision recommendations.
+The important part is that Project should not simply generate answers from an LLM's general knowledge. It should retrieve relevant information from educational sources, generate answers grounded in that information, and show students where the answers came from.
+my project demonstrates LLM integration, prompt engineering, embeddings, RAG, vector databases, model comparison and AI evaluation.
+
+
+Module	                             Main functionality
+Educational Resource Library	       Browse and select open educational content
+AI Study Notes	                     Generate summaries, definitions and revision notes
+Source-Grounded AI Tutor	           Ask questions and receive answers with citations
+AI Quiz Generator	                   Generate MCQs, true/false and short-answer questions
+Answer Evaluation	                   Evaluate responses and explain mistakes
+Adaptive Learning Dashboard	         Track weak topics and recommend revision
+
+intailly use the source of python_documentation as the source:https://docs.python.org/3/whatsnew/3.14.html
+
+Component      	      Technology	                Responsibility
+Frontend	            (flask/django)
+                      React+javascriptScript	    User interface
+Backend	              FastAPI	                    Business logic and APIs
+AI service	          Gemini / Groq	              Generate responses
+Embeddings	          Sentence Transformers	      Convert text to vectors
+Vector store	        ChromaDB	                  Semantic retrieval
+Relational database	  SQLite	                    Users, quizzes, scores
+Document parser	      PyMuPDF, BeautifulSoup	    Extract educational text
+Authentication	      JWT	                        User accounts
+Analytics	            Recharts	                  Performance dashboard

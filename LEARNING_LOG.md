@@ -24,10 +24,7 @@ i didn't get the point of zero shot prompting
 when I developed an chatboot app with ollama and deployed it is it used  ollama for other users which I was deployed?
 
 date 12-11-2026
-What I learned ?
-What i didnot get?
-What is the Tommorow next question?
-what is our project plan?
+only concentrated on Project
 Project title: PrepPilot — An Explainable, RAG-Based AI Study and Quiz Assistant Using Open Educational Resources.
 Project objective: Build an AI-powered learning platform that converts openly licensed educational materials into study notes, interactive quizzes, question-answering sessions and personalized revision recommendations.
 The important part is that Project should not simply generate answers from an LLM's general knowledge. It should retrieve relevant information from educational sources, generate answers grounded in that information, and show students where the answers came from.
@@ -55,3 +52,12 @@ Relational database	  SQLite	                    Users, quizzes, scores
 Document parser	      PyMuPDF, BeautifulSoup	    Extract educational text
 Authentication	      JWT	                        User accounts
 Analytics	            Recharts	                  Performance dashboard
+
+
+date 16/11/2026
+what I learn?
+learn about the inspect Complete API response and extract model, answer, and token usage,understand conversion of json,measure of api time
+what i didnot get?
+nothing
+next question for day?
+nothing

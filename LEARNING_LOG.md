@@ -58,6 +58,6 @@ date 16/11/2026
 what I learn?
 learn about the inspect Complete API response and extract model, answer, and token usage,understand conversion of json,measure of api time
 what i didnot get?
-nothing
+we should dealing with millions of datasets through using the parquet
 next question for day?
-nothing
+which technology i should use either fullstack website or Android application or any recommendation 

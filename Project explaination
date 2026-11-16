@@ -1,0 +1,813 @@
+1. PROJECT OVERVIEW
+
+Develop a full-stack AI-powered educational platform named PrepPilot – Explainable and Adaptive AI-Powered Learning Platform .
+
+PrepPilot is designed to help students understand academic concepts, generate study notes, practise quizzes, identify mistakes, and improve their learning performance using publicly available and appropriately licensed educational resources.
+
+The platform must integrate Generative AI, Large Language Models (LLMs), Retrieval-Augmented Generation (RAG), semantic search, and adaptive learning techniques to provide a personalized and explainable learning experience.
+
+Unlike ordinary AI chatbot applications that simply generate answers, PrepPilot must implement a continuous learning cycle:
+
+LEARN → TEST → DETECT → ADAPT
+
+LEARN: Students learn concepts through AI-generated notes and explanations.
+TEST: Students practise quizzes and coding questions.
+DETECT: The platform identifies incorrect answers, mistakes, and weak concepts.
+ADAPT: The platform recommends personalized study materials, revision activities, and practice questions.
+
+The main objective is to develop a reliable, explainable, personalized AI learning platform rather than a basic chatbot that calls an AI API.
+
+PROJECT REQUIREMENTS
+
+Follow these requirements throughout development:
+
+1. Use only publicly available educational content with verified reuse permissions.
+2. Maintain source attribution and licensing information for all educational materials.
+3. Use React with JavaScript only for the frontend.
+4. Use normal CSS for all styling.
+5. Use Python for backend development.
+6. Use FastAPI for REST API development.
+7. Use SQLite for relational data storage.
+8. Use sqlite-vec for vector similarity search, subject to compatibility testing.
+9. Integrate Gemini and Groq APIs.
+10. Use Sentence Transformers for generating text embeddings.
+11. Implement RAG for source-grounded AI responses.
+12. Keep frontend, backend, AI services, database logic, and reusable components separate.
+13. Never hardcode API keys or credentials.
+14. Use environment variables for API credentials.
+15. Do not invent evaluation results, accuracy percentages, or performance claims.
+16. Use mock data only during initial UI development. Replace it with real backend API responses during integration.
+17. Build and test features incrementally rather than generating the entire application in one step.
+
+TECHNOLOGY STACK
+
+FRONTEND
+
+- React.js
+- JavaScript (ES6+)
+- HTML5
+- CSS3
+- React Router DOM
+- Axios
+- Recharts
+- Lucide React
+
+BACKEND
+
+- Python
+- FastAPI
+- Uvicorn
+- Pydantic
+- SQLAlchemy or well-structured SQLite access
+
+DATABASE
+
+- SQLite
+- sqlite-vec for vector similarity search
+
+AI
+
+- Google Gemini API/Groq API
+- Sentence Transformers
+- Embedding model: all-MiniLM-L6-v2 (initial candidate)
+
+DOCUMENT PROCESSING
+
+- PyMuPDF for PDF extraction
+- BeautifulSoup for HTML extraction
+- Python preprocessing utilities
+
+DEVELOPMENT TOOLS
+
+- Visual Studio Code
+- Git
+- GitHub
+- Postman or equivalent API testing tool
+- Python virtual environment
+
+EDUCATIONAL DATA SOURCES
+
+Use educational resources from legitimate public educational platforms.
+
+Initial sources:
+
+1. Python Official Documentation:
+   https://docs.python.org/3/
+
+2. Think Python by Allen B. Downey:
+   https://allendowney.github.io/ThinkPython/
+
+3. OpenStax:
+   https://openstax.org/subjects
+
+4. MIT OpenCourseWare:
+   https://ocw.mit.edu/
+
+5. LibreTexts:
+   https://libretexts.org/
+
+6. Open Textbook Library:
+   https://open.umn.edu/opentextbooks
+
+7. Wikibooks:
+   https://en.wikibooks.org/
+
+8. NPTEL:
+   https://nptel.ac.in/
+
+Important data collection rules:
+
+- Verify the license of each individual resource.
+- Do not assume that publicly accessible content can automatically be copied or used for AI processing.
+- Respect copyright, website terms, attribution requirements, and restrictions on automated collection.
+- Do not scrape restricted websites.
+- Preserve the original source URL.
+- Record the resource title, author, publisher, license, attribution, and retrieval date.
+- Prefer open educational resources with clear reuse permissions.
+- Support source citations in all generated educational content.
+
+MAIN APPLICATION FEATURES
+
+FEATURE 1: AI TUTOR
+
+Create an educational AI chatbot.
+
+Requirements:
+
+- Subject selection.
+- Topic selection.
+- Student question input.
+- AI-generated explanations.
+- Follow-up questions.
+- Conversation history.
+- Loading and error states.
+- Source citations.
+- Relevant retrieved educational passages.
+- Insufficient-context handling.
+
+The AI Tutor must use RAG rather than relying only on general model knowledge.
+
+FEATURE 2: AI STUDY NOTES
+
+Generate structured study notes from approved educational resources.
+
+The notes should include:
+
+1. Topic overview.
+2. Key definitions.
+3. Important concepts.
+4. Simple explanations.
+5. Examples.
+6. Programming examples where relevant.
+7. Important points.
+8. Revision summary.
+9. Source references.
+
+Allow students to save and revisit generated notes.
+
+FEATURE 3: INTELLIGENT QUIZ GENERATION
+
+Generate quizzes using retrieved educational content.
+
+Support:
+
+- Multiple-choice questions.
+- True/False questions.
+- Short-answer questions.
+- Easy difficulty.
+- Medium difficulty.
+- Hard difficulty.
+- Custom question count.
+- Topic-based quizzes.
+- Subject-based quizzes.
+
+Each generated question should include:
+
+- Question text.
+- Options when applicable.
+- Correct answer.
+- Explanation.
+- Difficulty.
+- Topic.
+- Source reference.
+
+Ensure that the correct answer is supported by the supplied educational material.
+
+FEATURE 4: INTELLIGENT MISTAKE ANALYZER
+
+Analyze incorrect student answers.
+
+Identify possible mistakes such as:
+
+- Conceptual misunderstanding.
+- Syntax errors.
+- Incorrect conditions.
+- Logical errors.
+- Off-by-one errors.
+- Incorrect application of a formula.
+- Misunderstanding of terminology.
+
+For every identified mistake:
+
+1. Show the submitted answer.
+2. Show the expected answer.
+3. Explain why the answer is incorrect.
+4. Identify the likely mistake category.
+5. Recommend a relevant concept to revise.
+6. Generate targeted practice questions.
+
+Do not claim that every error can be diagnosed perfectly. Make the analysis transparent and allow uncertain classifications.
+
+FEATURE 5: ADAPTIVE LEARNING ENGINE
+
+Create a personalized learning recommendation system.
+
+Requirements:
+
+- Track quiz attempts.
+- Track topic-wise accuracy.
+- Identify weak concepts.
+- Identify strong concepts.
+- Recommend learning material.
+- Adjust quiz difficulty.
+- Recommend revision topics.
+- Generate personalized practice activities.
+
+Use a transparent rule-based recommendation system initially.
+
+Example:
+
+If a student consistently scores poorly in Python loops, recommend revising loop conditions and provide additional loop questions.
+
+Do not introduce complex machine learning unnecessarily. Build a reliable baseline first.
+
+FEATURE 6: CONCEPT DEPENDENCY MAP
+
+Show relationships between educational concepts.
+
+Example:
+
+Python Variables
+    ↓
+Data Types
+    ↓
+Conditional Statements
+    ↓
+Loops
+    ↓
+Functions
+    ↓
+Data Structures
+
+Requirements:
+
+- Display prerequisite concepts.
+- Display dependent concepts.
+- Highlight weak topics.
+- Recommend foundational topics.
+- Provide navigation to relevant study material.
+
+FEATURE 7: LEARNING ANALYTICS
+
+Display:
+
+- Total quizzes attempted.
+- Average quiz score.
+- Overall learning progress.
+- Subject-wise performance.
+- Topic-wise accuracy.
+- Strong topics.
+- Weak topics.
+- Recent activities.
+- Learning progress charts.
+- Revision recommendations.
+
+Use Recharts for visual analytics.
+
+Only display values calculated from actual stored student data.
+
+FEATURE 8: PUBLIC RESOURCE LIBRARY
+
+Create a searchable educational resource library.
+
+Display:
+
+- Resource title.
+- Author or publisher.
+- Subject.
+- Topic.
+- Description.
+- Original source URL.
+- License information.
+- Attribution.
+- Retrieval date.
+
+Provide search, filtering, and resource navigation.
+
+FEATURE 9: AI MODEL COMPARISON
+
+Integrate Gemini and Groq.
+
+Compare both providers using the same questions and comparable prompts.
+
+Measure:
+
+- Answer correctness.
+- Explanation quality.
+- Response latency.
+- Citation accuracy.
+- Groundedness.
+- Token usage, when available.
+- API errors.
+
+Do not declare a model superior without recorded test results.
+
+FEATURE 10: AI ANSWER RELIABILITY
+
+Implement checks for unsupported answers.
+
+Requirements:
+
+- Retrieve relevant educational context.
+- Assess whether sufficient information is available.
+- Avoid generating unsupported factual claims.
+- Provide citations for retrieved sources.
+- Handle questions outside the available knowledge base.
+- Test prompt-injection attempts in retrieved educational content.
+
+Treat source documents as untrusted data, not as instructions to the AI model.
+
+---
+
+FRONTEND UI REQUIREMENTS
+
+Design a professional, modern, clean, responsive educational SaaS application.
+
+Use:
+
+- React components.
+- JavaScript.
+- Normal CSS.
+- CSS Flexbox.
+- CSS Grid.
+- CSS media queries.
+- Reusable UI components.
+- Consistent spacing, typography, and colors.
+
+Overall Layout
+
+The application should contain:
+
+1. Left sidebar navigation.
+2. Top navigation bar.
+3. Main content section.
+4. Responsive page layouts.
+5. Reusable cards and buttons.
+6. Consistent color system.
+7. Loading states.
+8. Empty states.
+9. Error states.
+10. Accessible form controls.
+
+PAGE 1: LOGIN AND REGISTRATION
+
+UI elements:
+
+- PrepPilot logo.
+- Email field.
+- Password field.
+- Login button.
+- Forgot password option.
+- Registration link.
+- Name field on registration.
+- Form validation.
+- Error and success messages.
+
+PAGE 2: DASHBOARD
+
+UI elements:
+
+- Welcome message.
+- Student profile.
+- Total quizzes attempted.
+- Average score.
+- Completed topics.
+- Learning progress.
+- Recent learning activities.
+- Recommended topics.
+- Weak topic suggestions.
+- Quick actions.
+
+PAGE 3: AI TUTOR
+
+UI elements:
+
+- Subject dropdown.
+- Topic dropdown.
+- Chat conversation area.
+- Student message input.
+- Send button.
+- AI response area.
+- Loading indicator.
+- Follow-up questions.
+- Source citation links.
+- Conversation history.
+- Clear conversation option.
+
+PAGE 4: STUDY NOTES
+
+UI elements:
+
+- Subject selection.
+- Topic selection.
+- Generate notes button.
+- Topic overview.
+- Definitions.
+- Important concepts.
+- Code examples.
+- Revision summary.
+- Source references.
+- Save notes option.
+
+PAGE 5: QUIZ CENTER
+
+UI elements:
+
+- Subject selection.
+- Topic selection.
+- Difficulty selection.
+- Question type selection.
+- Number of questions.
+- Start quiz button.
+- Quiz history.
+
+PAGE 6: QUIZ ATTEMPT
+
+UI elements:
+
+- Question number.
+- Question text.
+- Multiple-choice options.
+- Next button.
+- Previous button.
+- Question navigation.
+- Progress indicator.
+- Submit quiz button.
+- Submission confirmation.
+
+PAGE 7: QUIZ RESULTS AND MISTAKE ANALYZER
+
+UI elements:
+
+- Total score.
+- Correct answer count.
+- Incorrect answer count.
+- Accuracy percentage.
+- Question review.
+- Correct answers.
+- Explanations.
+- Mistake categories.
+- Weak topic identification.
+- Revision recommendations.
+- Retry button.
+
+PAGE 8: MY PROGRESS
+
+UI elements:
+
+- Overall progress.
+- Subject-wise performance.
+- Quiz history.
+- Topic mastery.
+- Strong topics.
+- Weak topics.
+- Performance charts.
+- Learning activity.
+- Revision suggestions.
+
+PAGE 9: RESOURCE LIBRARY
+
+UI elements:
+
+- Search bar.
+- Subject filters.
+- Topic filters.
+- Resource cards.
+- Titles.
+- Authors.
+- Descriptions.
+- Original source links.
+- License information.
+
+PAGE 10: ADAPTIVE LEARNING
+
+UI elements:
+
+- Recommended topics.
+- Recommendation reasons.
+- Previous mistakes.
+- Suggested notes.
+- Targeted quiz buttons.
+- Revision schedule.
+- Topic mastery indicators.
+- Difficulty recommendations.
+
+---
+
+FRONTEND FOLDER STRUCTURE
+
+Use the following React JavaScript structure:
+
+frontend/
+    public/
+    src/
+        assets/
+        components/
+            layout/
+                Sidebar.jsx
+                Header.jsx
+                MainLayout.jsx
+            dashboard/
+            tutor/
+            notes/
+            quiz/
+            progress/
+            common/
+        pages/
+            Dashboard.jsx
+            AITutor.jsx
+            StudyNotes.jsx
+            QuizCenter.jsx
+            QuizAttempt.jsx
+            QuizResults.jsx
+            MyProgress.jsx
+            AdaptiveLearning.jsx
+            ResourceLibrary.jsx
+            Login.jsx
+            Register.jsx
+        services/
+            api.js
+            tutorService.js
+            quizService.js
+            notesService.js
+            resourceService.js
+        styles/
+            global.css
+            layout.css
+            dashboard.css
+            tutor.css
+            notes.css
+            quiz.css
+            responsive.css
+        context/
+        hooks/
+        utils/
+        App.jsx
+        main.jsx
+    index.html
+    package.json
+
+Use separate CSS files for components or page-specific styling where appropriate.
+
+BACKEND ARCHITECTURE
+
+Develop the backend using Python and FastAPI.
+
+Responsibilities:
+
+- Authentication.
+- User management.
+- Subject and topic management.
+- Resource management.
+- Document extraction.
+- Text preprocessing.
+- Text chunking.
+- Embedding generation.
+- Vector similarity search.
+- RAG processing.
+- AI model integration.
+- Notes generation.
+- Quiz generation.
+- Answer evaluation.
+- Mistake analysis.
+- Adaptive recommendations.
+- Learning analytics.
+
+Suggested backend structure:
+
+backend/
+    app/
+        api/
+            routes/
+                auth.py
+                subjects.py
+                resources.py
+                tutor.py
+                notes.py
+                quiz.py
+                analytics.py
+                learning.py
+        core/
+            config.py
+            security.py
+        database/
+            connection.py
+            models.py
+            schemas.py
+        services/
+            gemini_service.py
+            groq_service.py
+            embedding_service.py
+            retrieval_service.py
+            rag_service.py
+            notes_service.py
+            quiz_service.py
+            mistake_analyzer.py
+            adaptive_learning.py
+        ingestion/
+            pdf_extractor.py
+            html_extractor.py
+            text_cleaner.py
+            chunker.py
+        main.py
+    requirements.txt
+
+Maintain separation between routes, business logic, AI services, database operations, and document processing.
+
+DATABASE DESIGN
+
+Use SQLite for relational application data.
+
+Suggested tables:
+
+1. users
+2. subjects
+3. topics
+4. sources
+5. documents
+6. chunks
+7. embeddings
+8. quizzes
+9. questions
+10. attempts
+11. responses
+12. topic_performance
+13. recommendations
+14. saved_notes
+
+Maintain appropriate relationships and foreign keys.
+
+Store:
+
+- Student account information.
+- Educational resource metadata.
+- Document information.
+- Extracted text chunks.
+- Quiz questions.
+- Student answers.
+- Quiz scores.
+- Topic-wise performance.
+- Personalized recommendations.
+
+Use sqlite-vec for vector indexing and similarity search after verifying compatibility with the selected Python and SQLite environment.
+
+Do not store large embeddings as JSON and assume ordinary SQLite queries can perform efficient vector similarity search.
+
+---
+
+RAG PIPELINE
+
+Implement the following RAG workflow:
+
+1. Collect approved educational resources.
+2. Verify licensing and source metadata.
+3. Extract permitted text from PDF and HTML documents.
+4. Clean and preprocess the extracted content.
+5. Preserve headings and document structure.
+6. Divide text into manageable chunks.
+7. Generate embeddings using Sentence Transformers.
+8. Store chunks and source metadata in SQLite.
+9. Store and index vectors using sqlite-vec.
+10. Convert the student's question into an embedding.
+11. Retrieve the most relevant chunks.
+12. Check retrieval relevance and context sufficiency.
+13. Send the retrieved context and question to Gemini or Groq.
+14. Generate an educational explanation.
+15. Return the answer with source references.
+16. Indicate insufficient information when retrieval is inadequate.
+
+Use configurable chunk size, overlap, and top-k retrieval. Test and tune these values instead of treating initial settings as proven optimal.
+
+---
+
+API ENDPOINTS
+
+Create REST API endpoints such as:
+
+POST /auth/register
+POST /auth/login
+
+GET /subjects
+GET /subjects/{subject_id}/topics
+
+GET /sources
+GET /sources/{source_id}
+
+POST /documents/ingest
+
+POST /tutor/ask
+
+POST /study/notes
+
+POST /quiz/generate
+POST /quiz/submit
+GET /quiz/history
+
+GET /analytics/progress
+GET /analytics/weak-topics
+
+GET /learning/recommendations
+GET /learning/concept-map
+
+Use Pydantic request and response schemas.
+
+Implement proper validation, HTTP status codes, and error handling.
+
+
+SECURITY REQUIREMENTS
+
+- Store API keys in environment variables.
+- Never commit .env files to GitHub.
+- Provide .env.example with placeholder values.
+- Hash passwords securely.
+- Use authentication and authorization.
+- Validate uploaded file types and sizes.
+- Prevent unauthorized access to student records.
+- Configure CORS appropriately.
+- Validate API input.
+- Treat retrieved documents as untrusted content.
+- Protect against prompt injection.
+- Handle AI provider failures.
+- Do not expose API keys in frontend code or responses.
+- Provide safe error messages.
+- Consider privacy when sending user prompts to external AI providers.
+
+EVALUATION AND TESTING
+
+Create a test dataset containing at least 50 educational questions with expected answers and source references.
+
+Evaluate:
+
+1. Retrieval relevance.
+2. Answer correctness.
+3. Citation accuracy.
+4. Groundedness.
+5. Quiz correctness.
+6. Mistake classification quality.
+7. Recommendation usefulness.
+8. Response latency.
+9. Token usage.
+10. Unsupported-question handling.
+
+Compare Gemini and Groq using identical test cases and comparable settings.
+
+Include tests for:
+
+- Questions outside the knowledge base.
+- Incorrect citations.
+- Empty retrieval results.
+- Malformed educational documents.
+- API failures.
+- Invalid requests.
+- Prompt injection in source documents.
+
+Report actual results only. Do not invent accuracy or performance percentages.
+
+
+FINAL PROJECT OBJECTIVE
+
+Build a complete, working, explainable, and adaptive AI-powered educational platform.
+
+The final application must demonstrate:
+
+- A professional React and JavaScript frontend.
+- A Python FastAPI backend.
+- A structured SQLite database.
+- Public educational content with source attribution.
+- Semantic search and RAG.
+- Gemini and Groq integration.
+- Source-grounded AI tutoring.
+- AI study note generation.
+- Intelligent quiz generation.
+- Answer evaluation and mistake analysis.
+- Adaptive learning recommendations.
+- Learning progress analytics.
+- Evaluation and testing results.
+- Complete documentation.
+
+The defining feature of PrepPilot is its continuous learning cycle:
+
+LEARN → TEST → DETECT → ADAPT
+
+The platform should not simply answer student questions. It should help students understand concepts, identify knowledge gaps, and improve through personalized learning experiences.
+Begin with WEEK 1, DAY 1. First inspect the existing development environment and project files, then guide the development process step by step. Do not assume any setup command has already been executed.

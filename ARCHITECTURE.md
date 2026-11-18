@@ -35,7 +35,7 @@ Initial dataset: Open University Learning Analytics Dataset (OULAD), especially 
 
 Secondary candidate: EdNet, a much larger TOEIC English-learning interaction dataset. It is not a Python/SQL textbook corpus and its KT variants overlap. Its original CC BY-NC 4.0 licence must be reviewed before any public deployment or redistribution.
 
-Analytics data is stored as CSV/Parquet and queried using DuckDB. It is not automatically embedded into the RAG vector index.
+Analytics data is maintained as CSV/Parquet files outside the application repository. Pandas processes the files in batches, fastparquet handles Parquet reading/writing where needed, and selected validated records are imported into a separate SQLite analytics database for SQL queries. Analytics data is not automatically embedded into the RAG vector index.
 
 ## 3. Proposed technology stack
 
@@ -46,13 +46,13 @@ Analytics data is stored as CSV/Parquet and queried using DuckDB. It is not auto
 (5)Backend===>FastAPI (Python) because Designed for API development,Integrates naturally with Python AI/ML and RAG libraries,Automatic API documentation through Swagger UI,Request and response validation using Pydantic,Supports asynchronous endpoints.
 (6)API server===>Uvicorn  because it is  FastAPI is an ASGI framework  
 (7)Validation===>Pydantic because It prevents your API from blindly accepting incorrect data from the React frontend, external services or other clients. 
-(8)ORM===>SQLAlchemy or sqlite
+(8)ORM/database access===>SQLAlchemy with SQLite (two separate database files: analytics.db and application.db)
 (9)Embeddings===>model(all-MiniLM-L6-v2),libarary(Sentence Transformers),Local vector store(ChromaDB) 
 (10)LLM===>Gemini and Groq APIs because Compare providers using identical test cases 
 (11)PDF extraction===>PyMuPDF because Extract permitted PDF text 
 (12)HTML extraction===>BeautifulSoup because Process permitted HTML content
-(13)Analytics===>DuckDB + Parquet  because Query large files without loading all rows into application memory
-(14)Data preparation===>pandas + fastparquet for  Cleaning and format conversion 
+(13)Analytics===>Pandas + fastparquet + SQLite because Pandas processes source files in batches, fastparquet handles Parquet file operations, and SQLite executes SQL queries on selected data imported into analytics.db. SQLite does not query Parquet files directly.
+(14)Data preparation===>Pandas + fastparquet for batch cleaning, validation, transformation and CSV/Parquet format conversion 
 (15)Charts===>Recharts (web), Matplotlib (analysis) because  User-facing and research visualizations 
 (16)Tests===>Pytest, Postman because API and service validation 
 (17)Version control===> Git + GitHub because Code, documentation and reproducibility
@@ -61,7 +61,7 @@ Analytics data is stored as CSV/Parquet and queried using DuckDB. It is not auto
 
 **Proposed backend: FastAPI.**
 
-The application is primarily a Python REST API that orchestrates retrieval, embeddings, LLM calls, quiz generation, mistake analysis and analytics queries. FastAPI fits this workload and provides request validation and automatic OpenAPI documentation. Flask and Django were considered; the comparison and trade-offs are recorded in `BACKEND_DECISION.md`.
+The application is primarily a Python REST API that orchestrates retrieval, embeddings, LLM calls, quiz generation, mistake analysis and analytics queries. FastAPI fits this workload and provides request validation and automatic OpenAPI documentation. Flask and Django were considered.
 
 The selection remains a proposal until a small endpoint, provider call and deployment smoke test are completed.
 
@@ -92,8 +92,10 @@ Initial chunking hypothesis: approximately 500 tokens with approximately 80-toke
 5. Profile row counts, nulls, duplicates, key uniqueness, date ranges and category distributions.
 6. Convert CSV to Parquet where useful.
 7. Partition large Parquet files by a meaningful field only when query patterns justify it.
-8. Use DuckDB to query selected columns/partitions.
-9. Store analysis outputs and a reproducible script; do not upload the raw multi-GB dataset to the application repository.
+8. Use Pandas to read and process CSV files in chunks; do not load the complete large dataset into memory.
+9. Use fastparquet through Pandas for Parquet reading/writing and selected-column or row-group operations where appropriate.
+10. Import only the required, validated records into analytics.db in batches, then use SQLite SQL for filtering, joins, grouping and aggregations. SQLite does not query Parquet files directly.
+11. Store analysis outputs and reproducible scripts; do not upload raw or processed multi-GB datasets to the application repository.
 
 ## 6. RAG and LLM flow
 
@@ -183,10 +185,12 @@ The UI must include loading, empty, validation, error and insufficient-context s
 - Do not store public source datasets in Git history.
 - Keep source references, metadata, checksums, schema summaries and ingestion scripts in Git.
 - Keep raw and processed analytics files outside the application repository.
-- Use DuckDB to query Parquet in batches/columnar scans.
+- Use Pandas chunk-based processing and fastparquet for Parquet file operations; import selected validated records into a separate SQLite analytics database for SQL queries.
+- SQLite queries imported database tables; it does not execute SQL directly against external Parquet files.
 - Do not load tens of millions of rows into Pandas memory at once.
 - Keep the RAG knowledge corpus separate from student interaction analytics.
-- Store only application operational records (users, quizzes, attempts, progress) in the relational database.
+- Store only application operational records (users, quizzes, attempts and progress) in application.db (SQLite).
+- Keep selected public dataset records used for SQL analysis in a separate analytics.db (SQLite); never mix public dataset identities with real PrepPilot user identities.
 - Store embeddings in a dedicated vector index, not as large JSON blobs in ordinary relational rows.
 - Ingestion and re-indexing should be batch/offline jobs, not long synchronous HTTP requests on a free web service.
 
@@ -195,16 +199,17 @@ The UI must include loading, empty, validation, error and insufficient-context s
 Proposed first public demo:
 - React production build → Render Static Site.
 - FastAPI → Render Free Web Service.
-- Relational data → Supabase Postgres Free, subject to storage/inactivity limits.
+- Application operational data → SQLite in persistent storage, or a hosted SQLite-compatible service such as Turso only after validating the Python client, SQLAlchemy integration, persistence, limits and pricing. Do not use an ephemeral filesystem for the live SQLite database.
+- Dataset analytics database → keep analytics.db and large CSV/Parquet files in the offline research workspace; do not deploy the bulk analytics database with the free web application.
 - Vector index → separate persistent vector service, after a free-tier proof-of-concept and licence review.
 - LLM calls → Gemini/Groq from the backend using server-side environment secrets.
-- Large analytics files → local research workspace or permitted external dataset hosting; not the free application server.
+- Large analytics files and analytics.db → local/offline research workspace or permitted external dataset hosting; not the free application server.
 
-Why Render for both web frontend and Python API: it supports free static sites and Python web services, and one provider simplifies deployment and troubleshooting. The free API service is limited to 512 MB RAM and 0.1 CPU, spins down after 15 minutes of inactivity, and has ephemeral local storage. This is a demo environment, not a production guarantee.
+Why Render for the frontend and Python API: it supports static sites and Python web services, and one provider can simplify deployment and troubleshooting. However, the free web service has ephemeral local storage, so a SQLite database stored on its local filesystem will not provide reliable persistence across restarts/redeploys. Use a genuinely persistent database service or a hosting plan with a persistent disk; verify current plan limits before deployment. This is a demo environment, not a production guarantee.
 
-Vercel is a strong static React hosting alternative, but its Hobby plan is limited to personal/non-commercial use. Its Python Functions are serverless with execution and bundle limits; it is less suitable as the primary long-running RAG/API service. It can be used for the React frontend only if the project use is within the Hobby terms.
+Vercel is a static React hosting alternative, but check the current Hobby plan terms and limits before using it. Its Python Functions are serverless with execution and bundle limits; it is less suitable as the primary long-running RAG/API service. It can be used for the React frontend only if the project use is within the applicable plan terms.
 
-Turso is a SQLite-compatible hosted database candidate for small operational records. It does not replace object storage, Parquet analytics storage or a vector database. Use it only after validating the current Python client and ORM integration; otherwise Supabase Postgres is the lower-risk relational choice for FastAPI/SQLAlchemy.
+A hosted SQLite-compatible service such as Turso may be evaluated for the live application database if local SQLite persistence is not available on the selected host. Validate the current Python client, SQLAlchemy integration, transaction behaviour, limits and pricing before selecting it. It does not replace Parquet file storage, the offline analytics workflow or a vector database.
 
 ## 13. Security and reliability
 

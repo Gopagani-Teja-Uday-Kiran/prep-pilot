@@ -1,10 +1,4 @@
 # PrepPilot — Architecture and Project Plan
-
-**Version:** 1.0 proposal  
-**Date:** 18 November 2026  
-**Application:** Publicly deployable educational web application  
-**Data policy:** Publicly available educational content and datasets only
-
 ## 1. Project objective
 
 PrepPilot is an AI-powered study and quiz assistant. It supports a complete learning cycle:

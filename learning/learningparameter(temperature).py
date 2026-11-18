@@ -14,7 +14,7 @@ client = Groq(api_key=api_key)
 
 prompt = """
 Write a creative opening sentence
-for a science-fiction story.
+for a robo and lion story.
 """
 
 temperatures = [0.0, 0.3, 0.7, 1.0, 1.5]

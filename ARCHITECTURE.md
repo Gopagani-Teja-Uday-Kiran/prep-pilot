@@ -39,23 +39,23 @@ Analytics data is stored as CSV/Parquet and queried using DuckDB. It is not auto
 
 ## 3. Proposed technology stack
 
-Frontend===>React, JavaScript ES6+,
-Styling===>HTML5, CSS3, normal CSS,
-Routing===>React Router DOM
-API client===>Axios or Fetch
-Backend===>FastAPI (Python) because Designed for API development,Integrates naturally with Python AI/ML and RAG libraries,Automatic API documentation through Swagger UI,Request and response validation using Pydantic,Supports asynchronous endpoints.
-API server===>Uvicorn  because it is  FastAPI is an ASGI framework  
-Validation===>Pydantic because It prevents your API from blindly accepting incorrect data from the React frontend, external services or other clients. 
-ORM===>SQLAlchemy or sqlite
-Embeddings===>model(all-MiniLM-L6-v2),libarary(Sentence Transformers),Local vector store(ChromaDB) 
-LLM===>Gemini and Groq APIs because Compare providers using identical test cases 
-PDF extraction===>PyMuPDF because Extract permitted PDF text 
-HTML extraction===>BeautifulSoup because Process permitted HTML content
-Analytics===>DuckDB + Parquet  because Query large files without loading all rows into application memory
-Data preparation===>Pandas for  Cleaning and format conversion 
-Charts===>Recharts (web), Matplotlib (analysis) because  User-facing and research visualizations 
-Tests===>Pytest, Postman because API and service validation 
-Version control===> Git + GitHub because Code, documentation and reproducibility
+(1)Frontend===>React, JavaScript ES6+,
+(2)Styling===>HTML5, CSS3, normal CSS,
+(3)Routing===>React Router DOM
+(4)API client===>Axios or Fetch
+(5)Backend===>FastAPI (Python) because Designed for API development,Integrates naturally with Python AI/ML and RAG libraries,Automatic API documentation through Swagger UI,Request and response validation using Pydantic,Supports asynchronous endpoints.
+(6)API server===>Uvicorn  because it is  FastAPI is an ASGI framework  
+(7)Validation===>Pydantic because It prevents your API from blindly accepting incorrect data from the React frontend, external services or other clients. 
+(8)ORM===>SQLAlchemy or sqlite
+(9)Embeddings===>model(all-MiniLM-L6-v2),libarary(Sentence Transformers),Local vector store(ChromaDB) 
+(10)LLM===>Gemini and Groq APIs because Compare providers using identical test cases 
+(11)PDF extraction===>PyMuPDF because Extract permitted PDF text 
+(12)HTML extraction===>BeautifulSoup because Process permitted HTML content
+(13)Analytics===>DuckDB + Parquet  because Query large files without loading all rows into application memory
+(14)Data preparation===>pandas + fastparquet for  Cleaning and format conversion 
+(15)Charts===>Recharts (web), Matplotlib (analysis) because  User-facing and research visualizations 
+(16)Tests===>Pytest, Postman because API and service validation 
+(17)Version control===> Git + GitHub because Code, documentation and reproducibility
 
 ## 4. Backend selection
 

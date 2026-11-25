@@ -1,0 +1,1 @@
+ The part users interact with: pages, forms, and results. Keeping it separate lets you change the UI without mixing browser code into the Python backend. It should call the backend rather than read the datasets directly.

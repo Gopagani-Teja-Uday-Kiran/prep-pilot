@@ -1,0 +1,7 @@
+from app.core.config import (GROQ_MODEL,GEMINI_MODEL,validate_config,GROQ_API_KEY,GEMINI_API_KEY)
+validate_config()
+print("GEMINI_API_KEY",bool(GEMINI_API_KEY))
+print("GROQ_API_KEY",bool(GROQ_API_KEY))
+print("GEMINI_MODEL",GEMINI_MODEL)
+print("GROQ_MODEL",GROQ_MODEL)
+print("ALL CONFIG VARIABLES ARE SET")

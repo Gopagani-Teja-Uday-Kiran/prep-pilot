@@ -1,0 +1,1 @@
+Keeps document retrieval separate from API plumbing and from structured-data analysis. A RAG pipeline searches textual sources and provides relevant passages to a language model; it is not automatically the right tool for answering questions that require calculations over CSV or Parquet records.

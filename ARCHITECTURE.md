@@ -12,30 +12,32 @@ PrepPilot is an AI-powered study and quiz assistant. It supports a complete lear
 
 PrepPilot is not intended to be a generic chatbot. The core technical value is a source-grounded RAG workflow, measurable answer quality, quiz evaluation and explainable adaptive recommendations.
 
-## 2. Scope separation: knowledge corpus vs analytics data
+## 2.Keeping educational content and analytics data separate
 
-Two data pipelines must remain separate.
+prepiolt uses two seprate data pipelines because they serve different purposes
 
-### A. Knowledge/RAG corpus
+### A.Educational content for RAG
 
-Purpose: provide subject knowledge to the tutor, notes and quiz-generation modules.
+This content provides the AI tutor, study notes and quiz generation features with material to work from.
+intial sources include:
 
-Initial candidate content:
-- OpenStax textbook chapters whose individual licence permits the intended extraction, embedding, adaptation and public use.
-- Think Python, after verifying the applicable licence and attribution requirements.
-- Official Python documentation, subject to its documentation licence and terms.
+-OpenStax textbook chapters,after checking that the licence for each selected resource allows the planned extraction,embedding,adaptation and public use.
 
-This corpus is document/chunk oriented. Each chunk retains document title, author/publisher, source URL, licence, attribution, retrieval date, chapter/section and page/anchor where available.
+-Think python, after checking its applicable license and attribution requirements
+
+This material is organized as documents and smaller text sections called chunks. Each chunk should retain useful source details, including the document title, author, source url, license,attribution,data accessed, chapter or section and page number
 
 ### B. Learning analytics datasets
 
-Purpose: investigate learner interactions, assessment outcomes and engagement patterns.
+This datasets will be used to study learning activity, assessment results and engagement patterns. They are not the textbook knowledge base used by the AI tutor
 
-Initial dataset: Open University Learning Analytics Dataset (OULAD), especially `studentVle.csv`, with approximately 10.66 million click records reported for the dataset.
+Primary Dataset to investigate is the open university learning analytics dataset(OULAD).Its studentVle.csv file contains approximately 10.66 million click records, as reported for the dataset
 
-Secondary candidate: EdNet, a much larger TOEIC English-learning interaction dataset. It is not a Python/SQL textbook corpus and its KT variants overlap. Its original CC BY-NC 4.0 licence must be reviewed before any public deployment or redistribution.
+Secondary dataset is contains a much larger collection of TOEIC English-learning interactions. However it is not a python or SQL textbook datasets, and its KT datasets variants overlap. The original Edet license is CC BY-NC 4.0,so its non-commercial conditions must be reviewed before using the data in public deployment or redistributing it.
 
-Analytics data is maintained as CSV/Parquet files outside the application repository. Pandas processes the files in batches, fastparquet handles Parquet reading/writing where needed, and selected validated records are imported into a separate SQLite analytics database for SQL queries. Analytics data is not automatically embedded into the RAG vector index.
+The analytics files will remain outside the application repository in csv or parquet.Pandas will process the file operations were needed.Onlu the records required for analysis,and validated during preparation,will be imported into the SQLite databse named analytics.db
+
+These analytics records will not automatically be added to the RAG vector index. The educational knowledge corpus and the learning analytics data have different purposes and will remain separate.
 
 ## 3. Proposed technology stack
 
@@ -237,3 +239,23 @@ A hosted SQLite-compatible service such as Turso may be evaluated for the live a
 - At least 50 evaluation questions have expected answers and source references.
 - Retrieval relevance, answer correctness, citation accuracy, quiz correctness, latency and provider failures are measured.
 - Deployment limitations and data licences are documented.
+
+## 15. Project development approach
+
+Month 1 – Project setup and backend
+Set up the project, understand the datasets, develop the backend, and build the initial RAG pipeline.
+
+Month 2 – AI features and frontend
+Integrate LLMs, develop the quiz system, implement adaptive recommendations, and connect the frontend with the backend.
+
+Month 3 – Analytics, testing and deployment
+Work on SQL analytics, test the complete application, deploy it using Render, and prepare the final documentation.
+
+
+
+
+
+
+
+
+

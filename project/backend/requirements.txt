@@ -1,2 +1,13 @@
 fastapi
 uvicorn[standard]
+groq
+google-genai
+python-dotenv
+pandas
+fastparquet
+ipykernel
+matplotlib
+pytest
+sentence-transformers
+chromadb
+beautifulsoup4

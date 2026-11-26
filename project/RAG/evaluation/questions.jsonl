@@ -1,0 +1,15 @@
+{"id":"a1","question":"How do I start the Python interpreter interactively?","expected_url":"https://docs.python.org/3.14/tutorial/interpreter.html","answerable":true}
+{"id":"a2","question":"How can command-line arguments be accessed in Python?","expected_url":"https://docs.python.org/3.14/tutorial/interpreter.html","answerable":true}
+{"id":"a3","question":"What source code encoding does Python use by default?","expected_url":"https://docs.python.org/3.14/tutorial/interpreter.html","answerable":true}
+{"id":"a4","question":"How does an if statement choose which block to run?","expected_url":"https://docs.python.org/3.14/tutorial/controlflow.html","answerable":true}
+{"id":"a5","question":"What does the range function do in a for loop?","expected_url":"https://docs.python.org/3.14/tutorial/controlflow.html","answerable":true}
+{"id":"a6","question":"What is the difference between break and continue?","expected_url":"https://docs.python.org/3.14/tutorial/controlflow.html","answerable":true}
+{"id":"a7","question":"What is the pass statement used for?","expected_url":"https://docs.python.org/3.14/tutorial/controlflow.html","answerable":true}
+{"id":"a8","question":"How do list comprehensions create a new list?","expected_url":"https://docs.python.org/3.14/tutorial/datastructures.html","answerable":true}
+{"id":"a9","question":"How can a Python list be used as a stack?","expected_url":"https://docs.python.org/3.14/tutorial/datastructures.html","answerable":true}
+{"id":"a10","question":"How can a Python list be used as a queue?","expected_url":"https://docs.python.org/3.14/tutorial/datastructures.html","answerable":true}
+{"id":"u1","question":"What causes a solar eclipse?","expected_url":null,"answerable":false}
+{"id":"u2","question":"What is the capital of Brazil?","expected_url":null,"answerable":false}
+{"id":"u3","question":"How do I make sourdough bread?","expected_url":null,"answerable":false}
+{"id":"u4","question":"Who won the 2024 Olympic 100 metre race?","expected_url":null,"answerable":false}
+{"id":"u5","question":"What are current mortgage rates in India?","expected_url":null,"answerable":false}
